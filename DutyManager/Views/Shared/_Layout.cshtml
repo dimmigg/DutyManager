@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/Style.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light bg-light border rounded-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    @ViewBag.Title
+                </a>
+            </div>
+        </nav>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
