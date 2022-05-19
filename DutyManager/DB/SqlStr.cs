@@ -11,5 +11,6 @@ namespace DutyManager.DB
         public static string GetRoster => "tool.uspDutyManagerGetRoster";        
         public static string GetHolidays => "tool.uspDutyManagerGetHolidays";
         public static string GetWorkdays => "tool.uspDutyManagerGetWorkdays";
+        public static string GetMainTable => "tool.uspDutyManagerGetMainTable";
     }
 }

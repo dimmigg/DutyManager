@@ -46,3 +46,29 @@ begin
     from
         tool.tDutyManagerWorkdays as a
 end;
+
+
+create procedure tool.uspDutyManagerGetMainTable
+as
+begin
+    select
+        a.MappingId,
+        d.DayOfWeekName,
+        a.DateStart, 
+        dateadd(hour, c.DurationOfDuty, a.DateStart) as DateFinish,
+        b.LoginName,
+        b.FullName,
+        b.Phone,
+        b.OtherInfo
+    from
+        tool.tDutyManagerMapping as a
+    inner join
+        tool.tDutyManagerEmployees as b
+        on a.EmployeeId = b.EmployeeId
+    inner join
+        tool.tDutyManagerRoster as c
+        on a.RosterId = c.RosterId
+    inner join
+        tool.tDutyManagerDaysOfWeek as d
+        on c.DayWeekId = d.DayOfWeekId
+end;

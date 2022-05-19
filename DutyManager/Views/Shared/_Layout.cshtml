@@ -1,24 +1,39 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="ru">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/Style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <script src="~/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-light bg-light border rounded-4">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    @ViewBag.Title
-                </a>
+
+    <header class="p-3 bg-info text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <button type="button" class="btn btn-warning me-2">Расчет</button>
+                    <button type="button" class="btn btn-success me-2">Экспорт</button>
+                </div>
+
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-primary btn-light me-2">Главная</button>
+                <button type="button" class="btn btn-outline-light me-2">Сотрудники</button>
+                <button type="button" class="btn btn-outline-light me-2">Назначения</button>
+                <button type="button" class="btn btn-outline-light me-2">Отпуска</button>
+                <button type="button" class="btn btn-outline-light me-2">Параметры</button>
+                <button type="button" class="btn btn-outline-success me-0">Help</button>
             </div>
-        </nav>
-    </div>
-    <div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
         @RenderBody()
     </div>
 </body>

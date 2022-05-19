@@ -2,6 +2,7 @@
 using DutyManager.Extensions;
 using DutyManager.Models;
 using DutyManager.Services;
+using DutyManager.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,13 @@ namespace DutyManager.Controllers
         public IActionResult Index()
         {
             ViewBag.Title = "Менеджер дежурств";
-            new Calculate().StartCalculate();
+            //new Calculate().StartCalculate();
 
-            return View();
+            IndexModel indexModel = new IndexModel
+            {
+                Data = DBService.GetData<MainTableModel>(SqlStr.GetMainTable)
+            };
+            return View(indexModel);
         }
     }
 }

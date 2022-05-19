@@ -1,4 +1,36 @@
-﻿/*body {
-    background: Red
+﻿body {
+    background: White
 }
-*/
+
+.scroll-table-body {
+    height: 700px;
+    overflow-x: auto;
+    margin-bottom: 10px;
+}
+/**/
+.scroll-table table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.scroll-table thead th {
+    text-align: center;
+}
+
+.scroll-table tbody td {
+    text-align: center;
+    padding: 5px;
+}
+
+/* Стили для скролла */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}

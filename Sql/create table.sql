@@ -88,6 +88,7 @@ insert into tool.tDutyManagerHolidays (EmployeeId, DateStart, DateFinish) values
 insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork) values (1, 11, '2022-05-21')
                                         
 truncate table tool.tDutyManagerWorkdays
+truncate table tool.tDutyManagerMapping
 
 select * from 
     tool.tDutyManagerRoster as a
