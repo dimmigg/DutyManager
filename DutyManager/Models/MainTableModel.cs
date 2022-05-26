@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DutyManager.DB;
+using System;
+using System.Collections.Generic;
 
 namespace DutyManager.Models
 {
@@ -12,5 +14,6 @@ namespace DutyManager.Models
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string OtherInfo { get; set; }
+        public static IEnumerable<MainTableModel> GetAllItems() => DBService.GetData<MainTableModel>(SqlStr.GetMainTable);
     }
 }

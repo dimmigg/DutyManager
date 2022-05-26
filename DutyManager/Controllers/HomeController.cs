@@ -1,6 +1,5 @@
 ﻿using DutyManager.DB;
 using DutyManager.Models;
-using DutyManager.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -8,46 +7,28 @@ namespace DutyManager.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            ViewBag.Title = "Менеджер дежурств";
-            //new Calculate().StartCalculate();
+        public IActionResult Index() => View(MainTableModel.GetAllItems());
 
-            IndexModel indexModel = new IndexModel
-            {
-                Data = DBService.GetData<MainTableModel>(SqlStr.GetMainTable)
-            };
-            return View(indexModel);
-        }
+        public IActionResult ListEmployee() => View(Employee.GetAllEmployees());
 
-        public IActionResult Employee()
+        public IActionResult EmployeeEditById(int Id) => PartialView("_EmployeeEdit", Employee.GetEmployeeById(Id));
+        public IActionResult EmployeeDeleteById(int Id) => PartialView("_EmployeeDelete", Employee.GetEmployeeById(Id));
+        public IActionResult EmployeeAdd() => PartialView("_EmployeeAdd");
+        public IActionResult EmployeeDel(int EmployeeId)
         {
-            ViewBag.Title = "Сотрудники";
-            EmployeeModel indexModel = new EmployeeModel
-            {
-                Data = DBService.GetData<Employee>(SqlStr.GetEmployees)
-            };
-            return View(indexModel);
-        }
-
-        public IActionResult EmployeeEdit(int EmployeeId)
-        {
-            ViewBag.Title = "Сотрудники";
-            var Data = DBService.GetData<Employee>(SqlStr.GetEmployees);
-            var emp = Data.FirstOrDefault(x => x.EmployeeId == EmployeeId);
-            return View(emp);
+            Employee.DelEmployee(EmployeeId);
+            return Redirect("ListEmployee");
         }
 
         [HttpPost]
         public IActionResult EmployeeEdit(Employee emp)
         {
-            ViewBag.Title = "Сотрудники";
             if(ModelState.IsValid)
             {
-                //Сохранить изменения
-                return Redirect("Employee");
+                Employee.EditEmployee(emp);
+                return Redirect("ListEmployee");
             }
-            return View();
+            return View("_EmployeeEdit", emp);
         }
     }
 }

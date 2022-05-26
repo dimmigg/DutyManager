@@ -28,17 +28,18 @@
                 <div class="text-end" id="navheader">
                     @*<a href='@Url.Action("Index", "Home")' class="btn btn-outline-light me-2" id="btn-navbar">Главная</a>*@
                     <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light me-2" id="navbarIndex">Главная</a>
-                    <a asp-controller="Home" asp-action="Employee" class="btn btn-outline-light me-2" id="navbarEmployee">Сотрудники</a>
+                    <a asp-controller="Home" asp-action="ListEmployee" class="btn btn-outline-light me-2" id="navbarEmployee">Сотрудники</a>
                     <a href='#' type="button" class="btn btn-outline-light me-2">Назначения</a>
                     <a href='#' type="button" class="btn btn-outline-light me-2">Отпуска</a>
                     <a href='#' type="button" class="btn btn-outline-light me-2">Параметры</a>
                     <a href='#' type="button" class="btn btn-outline-success me-0">Help</a>
+                    
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="container">
+    <div class="container h-100">
 
         @RenderBody()
 

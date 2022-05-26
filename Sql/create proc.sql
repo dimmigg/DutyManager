@@ -72,3 +72,61 @@ begin
         tool.tDutyManagerDaysOfWeek as d
         on c.DayWeekId = d.DayOfWeekId
 end;
+
+
+
+create procedure tool.uspDutyManagerEditEmployee
+(
+    @EmployeeId int,
+    @FullName varchar(200),
+    @LoginName varchar(50),
+    @Phone varchar(200)
+)
+as
+begin
+    update a
+    set
+        a.FullName = @FullName,
+        a.Loginname = @LoginName,
+        a.Phone = @Phone
+    from
+        tool.tDutyManagerEmployees as a
+    where
+        a.EmployeeId = @EmployeeId;
+end;
+
+
+create procedure tool.uspDutyManagerDelEmployee
+(
+    @EmployeeId int
+)
+as
+begin
+    delete a
+    from
+        tool.tDutyManagerEmployees as a
+    where
+        a.EmployeeId = @EmployeeId;
+end;
+
+create procedure tool.uspDutyManagerAddEmployee
+(
+    @FullName varchar(200),
+    @LoginName varchar(50),
+    @Phone varchar(200)
+)
+as
+begin
+    insert into tool.tDutyManagerEmployees
+    (
+        FullName,
+        LoginName,
+        Phone
+    )
+    values
+    (
+        @FullName,
+        @LoginName,
+        @Phone
+    )
+end;

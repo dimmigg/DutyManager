@@ -1,5 +1,4 @@
-﻿@using DutyManager.ViewModel
-@model IndexModel
+﻿@model IEnumerable<MainTableModel>
 
 
 <div class="scroll-table">
@@ -18,7 +17,7 @@
     <div class="table border mt-0 scroll-table-body">
         <table class="table table-striped">
             <tbody class="">
-                @foreach (var item in Model.Data)
+                @foreach (var item in Model)
                 {
                     <tr>
                         <td>@item.DayOfWeekName</td>

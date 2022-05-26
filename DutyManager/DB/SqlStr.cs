@@ -12,5 +12,9 @@ namespace DutyManager.DB
         public static string GetHolidays => "tool.uspDutyManagerGetHolidays";
         public static string GetWorkdays => "tool.uspDutyManagerGetWorkdays";
         public static string GetMainTable => "tool.uspDutyManagerGetMainTable";
+
+        public static string EditEmployee => "tool.uspDutyManagerEditEmployee";
+        public static string AddEmployee => "tool.uspDutyManagerAddEmployee";
+        public static string DelEmployee => "tool.uspDutyManagerDelEmployee";
     }
 }
