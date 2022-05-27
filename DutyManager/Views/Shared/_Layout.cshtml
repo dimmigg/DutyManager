@@ -13,7 +13,10 @@
     <script src="https://kit.fontawesome.com/beb727a5bd.js" crossorigin="anonymous"></script>
     @*<script src="~/js/bootstrap.bundle.min.js"></script>*@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>*@
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
 
@@ -21,19 +24,21 @@
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <button type="button" class="btn btn-warning me-2">Расчет</button>
+                    <a asp-controller="Home" asp-action="Calc" class="btn btn-warning me-2">Расчет</a>
+                    @*<button type="button" class="btn btn-warning me-2">Расчет</button>*@
                     <button type="button" class="btn btn-success me-2">Экспорт</button>
                 </div>
 
                 <div class="text-end" id="navheader">
                     @*<a href='@Url.Action("Index", "Home")' class="btn btn-outline-light me-2" id="btn-navbar">Главная</a>*@
                     <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light me-2" id="navbarIndex">Главная</a>
-                    <a asp-controller="Home" asp-action="ListEmployee" class="btn btn-outline-light me-2" id="navbarEmployee">Сотрудники</a>
-                    <a href='#' type="button" class="btn btn-outline-light me-2">Назначения</a>
+                    <a asp-controller="Home" asp-action="ListEmployee" class="btn btn-outline-light me-2" id="navbarEmployees">Сотрудники</a>
+                    <a asp-controller="Home" asp-action="ListWorkdays" class="btn btn-outline-light me-2" id="navbarWorkdays">Назначения</a>
                     <a href='#' type="button" class="btn btn-outline-light me-2">Отпуска</a>
+                    <a asp-controller="Home" asp-action="ListRoster" class="btn btn-outline-light me-2" id="navbarRoster">Дежурства</a>
                     <a href='#' type="button" class="btn btn-outline-light me-2">Параметры</a>
                     <a href='#' type="button" class="btn btn-outline-success me-0">Help</a>
-                    
+
                 </div>
             </div>
         </div>
@@ -59,6 +64,13 @@
                 //alert('')
             });
         </script>*@
+    <script>
+        $(function () {
+            $(document).ajaxComplete(function () {
+                $.validator.unobtrusive.parse(document);
+            });
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

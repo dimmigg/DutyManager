@@ -2,6 +2,8 @@ drop table tool.tDutyManagerEmployees
 drop table tool.tDutyManagerDaysOfWeek
 drop table tool.tDutyManagerRoster
 drop table tool.tDutyManagerMapping
+drop table tool.tDutyManagerHolidays
+drop table tool.tDutyManagerWorkdays
 
 create table tool.tDutyManagerEmployees
 (
@@ -21,7 +23,7 @@ create table tool.tDutyManagerDaysOfWeek
 create table tool.tDutyManagerRoster
 (
     RosterId        int identity(1,1)   not null,
-    DayWeekId       int                 not null,
+    DayOfWeekId     int                 not null,
     StartTime       time(0)             not null,
     DurationOfDuty  int                 not null
 )on [primary]
@@ -86,6 +88,9 @@ insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) value
 insert into tool.tDutyManagerHolidays (EmployeeId, DateStart, DateFinish) values (1, getdate(), getdate()+1)
 
 insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork) values (1, 11, '2022-05-21')
+insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork) values (1, 11, '2022-05-22')
+insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork) values (1, 11, '2022-05-23')
+insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork) values (1, 11, '2022-05-24')
                                         
 truncate table tool.tDutyManagerWorkdays
 truncate table tool.tDutyManagerMapping

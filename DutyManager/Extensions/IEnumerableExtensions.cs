@@ -1,4 +1,5 @@
 ﻿using DutyManager.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,6 +36,18 @@ namespace DutyManager.Extensions
                 result.Rows.Add(row);
             }
             return result;
+        }
+
+        public static IEnumerable ToSelectListItems(this IEnumerable<DutyManager.Models.Employee> employees, int selectedId)
+        {
+            return employees.OrderBy(emp => emp.FullName)
+                      .Select(emp =>
+                          new SelectListItem
+                          {
+                              Selected = (emp.EmployeeId == selectedId),
+                              Text = emp.FullName,
+                              Value = emp.EmployeeId.ToString()
+                          });
         }
     }
 }

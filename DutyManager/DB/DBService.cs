@@ -42,6 +42,90 @@ namespace DutyManager.DB
             }
         }
 
+        internal static IEnumerable<T> GetData<T>(object getDaysOfWeek)
+        {
+            throw new NotImplementedException();
+        }
+
+        #region Roster
+        internal static void DelRoster(int id)
+        {
+            using (var connect = Connection.Instance.GetNewConnection())
+            {
+                DynamicParameters dp = new DynamicParameters();
+                dp.Add("RosterId", id);
+                connect.ExecuteProcedure<string>(SqlStr.DelRoster, dp);
+            }
+        }
+
+        internal static void EditRoster(Roster ros)
+        {
+            using (var connect = Connection.Instance.GetNewConnection())
+            {
+                DynamicParameters dp = new DynamicParameters();
+                dp.Add("RosterId", ros.RosterId);
+                dp.Add("DayOfWeekId", ros.DayOfWeekId);
+                dp.Add("StartTime", ros.StartTime);
+                dp.Add("DurationOfDuty", ros.DurationOfDuty);
+
+                connect.ExecuteProcedure<string>(SqlStr.EditRoster, dp);
+            }
+        }
+
+        internal static void AddRoster(Roster ros)
+        {
+            using (var connect = Connection.Instance.GetNewConnection())
+            {
+                DynamicParameters dp = new DynamicParameters();
+                dp.Add("DayOfWeekId", ros.DayOfWeekId);
+                dp.Add("StartTime", ros.StartTime);
+                dp.Add("DurationOfDuty", ros.DurationOfDuty);
+
+                connect.ExecuteProcedure<string>(SqlStr.AddRoster, dp);
+            }
+        }
+        #endregion
+
+        #region Workday
+        internal static void DelWorkday(int id)
+        {
+            using (var connect = Connection.Instance.GetNewConnection())
+            {
+                DynamicParameters dp = new DynamicParameters();
+                dp.Add("WorkdayId", id);
+                connect.ExecuteProcedure<string>(SqlStr.DelWorkday, dp);
+            }
+        }
+
+        internal static void EditWorkday(Workday day)
+        {
+            using (var connect = Connection.Instance.GetNewConnection())
+            {
+                DynamicParameters dp = new DynamicParameters();
+                dp.Add("WorkdayId", day.WorkdayId);
+                dp.Add("EmployeeId", day.EmployeeId);
+                dp.Add("RosterId", day.RosterId);
+                dp.Add("DateWork", day.DateWork);
+
+                connect.ExecuteProcedure<string>(SqlStr.EditWorkday, dp);
+            }
+        }
+
+        internal static void AddWorkday(Workday day)
+        {
+            using (var connect = Connection.Instance.GetNewConnection())
+            {
+                DynamicParameters dp = new DynamicParameters();
+                dp.Add("EmployeeId", day.EmployeeId);
+                dp.Add("RosterId", day.RosterId);
+                dp.Add("DateWork", day.DateWork);
+
+                connect.ExecuteProcedure<string>(SqlStr.AddWorkday, dp);
+            }
+        }
+        #endregion
+
+        #region Employee
         internal static void EditEmployee(Employee emp)
         {
             using (var connect = Connection.Instance.GetNewConnection())
@@ -75,9 +159,9 @@ namespace DutyManager.DB
             {
                 DynamicParameters dp = new DynamicParameters();
                 dp.Add("EmployeeId", id);
-
                 connect.ExecuteProcedure<string>(SqlStr.DelEmployee, dp);
             }
         }
+        #endregion
     }
 }

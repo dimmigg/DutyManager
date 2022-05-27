@@ -6,21 +6,27 @@ using System.Linq;
 
 namespace DutyManager.Services
 {
-    public class Calculate
+    public static class Calculate
     {
-        public DateTime Start { get; set; } = DateTime.Today;
-        public DateTime Finish { get; set; } = DateTime.Today.AddDays(30);
-        private readonly IEnumerable<Roster> AllRoster = DBService.GetData<Roster>(SqlStr.GetRoster);
-        private readonly IEnumerable<Employee> AllEmployees = DBService.GetData<Employee>(SqlStr.GetEmployees);
-        private readonly IEnumerable<Holiday> AllHolidays = DBService.GetData<Holiday>(SqlStr.GetHolidays);
-        private readonly IEnumerable<WorkDay> AllWorkDays = DBService.GetData<WorkDay>(SqlStr.GetWorkdays);
-        private readonly List<MappingModel> DailyDuties = new List<MappingModel>();
-        public void StartCalculate()
+        public static DateTime Start { get; set; } = DateTime.Today;
+        public static DateTime Finish { get; set; } = DateTime.Today.AddDays(30);
+        private static readonly IEnumerable<Roster> AllRoster = DBService.GetData<Roster>(SqlStr.GetRoster);
+        private static readonly IEnumerable<Employee> AllEmployees = DBService.GetData<Employee>(SqlStr.GetEmployees);
+        private static readonly IEnumerable<Holiday> AllHolidays = DBService.GetData<Holiday>(SqlStr.GetHolidays);
+        private static readonly IEnumerable<Workday> AllWorkdays = Workday.GetAllWorkdays();
+        private static readonly List<MappingModel> DailyDuties = new List<MappingModel>();
+        public static void StartCalculate()
         {
             MainCalc();
         }
+        public static void StartCalculate(DateTime start, DateTime finish)
+        {
+            Start = start;
+            Finish = finish;
+            MainCalc();
+        }
 
-        private void MainCalc()
+        private static void MainCalc()
         {
             DateTime currDate = Start;
             List<MappingModel> mapp = new List<MappingModel>();
@@ -28,14 +34,14 @@ namespace DutyManager.Services
             while (currDate <= Finish)
             {
                 var dayOfWeek = ((int)currDate.DayOfWeek);
-                var curRoster = AllRoster.Where(x => x.DayWeekId == dayOfWeek);
+                var curRoster = AllRoster.Where(x => x.DayOfWeekId == dayOfWeek);
 
                 foreach (var item in curRoster)
                 {
                     int emp;
-                    if (AllWorkDays.Any(x => x.RosterId == item.RosterId && x.DateWork == currDate))
+                    if (AllWorkdays.Any(x => x.RosterId == item.RosterId && x.DateWork == currDate))
                     {
-                        emp = AllWorkDays.Where(x => x.RosterId == item.RosterId && x.DateWork == currDate).FirstOrDefault().EmployeeId;
+                        emp = AllWorkdays.Where(x => x.RosterId == item.RosterId && x.DateWork == currDate).FirstOrDefault().EmployeeId;
                         AddMapping(currDate, item, emp);
                     }
                 }
@@ -44,7 +50,7 @@ namespace DutyManager.Services
                 {
                     int emp;
 
-                    if (!AllWorkDays.Any(x => x.RosterId == item.RosterId && x.DateWork == currDate))
+                    if (!AllWorkdays.Any(x => x.RosterId == item.RosterId && x.DateWork == currDate))
                     {       
                         emp = GetFreeEmployeeId(currDate, item);
                         AddMapping(currDate, item, emp);
@@ -55,7 +61,7 @@ namespace DutyManager.Services
             DBService.InsertData(DailyDuties, "tool.tDutyManagerMapping");
         }
 
-        private void AddMapping(DateTime currDate, Roster item, int emp)
+        private static void AddMapping(DateTime currDate, Roster item, int emp)
         {
             DateTime start = currDate + item.StartTime;
             DateTime finish = start.AddHours(item.DurationOfDuty);
@@ -69,7 +75,7 @@ namespace DutyManager.Services
         }
         
 
-        private int GetFreeEmployeeId(DateTime currDate, Roster item)
+        private static int GetFreeEmployeeId(DateTime currDate, Roster item)
         {
             DateTime startDate = currDate + item.StartTime;
             DateTime finishDate = startDate.AddHours(item.DurationOfDuty);

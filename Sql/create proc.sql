@@ -11,20 +11,6 @@ begin
         tool.tDutyManagerEmployees as a
 end;
 
-
-create procedure tool.uspDutyManagerGetRoster
-as
-begin
-    select
-        a.RosterId,
-        a.DayWeekId,
-        a.StartTime,
-        a.DurationOfDuty
-    from
-        tool.tDutyManagerRoster as a
-end;
-
-
 create procedure tool.uspDutyManagerGetHolidays
 as
 begin
@@ -34,17 +20,6 @@ begin
         a.DateFinish
     from
         tool.tDutyManagerHolidays as a
-end;
-
-create procedure tool.uspDutyManagerGetWorkdays
-as
-begin
-    select
-        a.EmployeeId,
-        a.RosterId,
-        a.DateWork
-    from
-        tool.tDutyManagerWorkdays as a
 end;
 
 
@@ -70,7 +45,7 @@ begin
         on a.RosterId = c.RosterId
     inner join
         tool.tDutyManagerDaysOfWeek as d
-        on c.DayWeekId = d.DayOfWeekId
+        on c.DayOfWeekId = d.DayOfWeekId
 end;
 
 
@@ -130,3 +105,170 @@ begin
         @Phone
     )
 end;
+
+create procedure tool.uspDutyManagerGetWorkdays
+as
+begin
+    select
+        a.WorkdayId,
+        a.EmployeeId,
+        a.RosterId,
+        a.IsAlways,
+        a.DateWork,
+        b.FullName,
+        c.StartTime,
+        c.DurationOfDuty
+    from
+        tool.tDutyManagerWorkdays as a
+    inner join
+        tool.tDutyManagerEmployees as b
+        on a.EmployeeId = b.EmployeeId
+    inner join
+        tool.tDutyManagerRoster as c
+        on a.RosterId = c.RosterId
+end;
+
+
+create procedure tool.uspDutyManagerAddWorkday
+(
+    @EmployeeId int,
+    @RosterId int,
+    @IsAlways bit,
+    @DateWork datetime2(0)
+)
+as
+begin
+    insert into tool.tDutyManagerWorkdays
+    (
+        EmployeeId,
+        RosterId,
+        IsAlways,
+        DateWork
+    )
+    values
+    (
+        @EmployeeId,
+        @RosterId,
+        @IsAlways,
+        @DateWork
+    )
+end;
+
+create procedure tool.uspDutyManagerEditWorkday
+(
+    @WorkdayId int,
+    @EmployeeId int,
+    @RosterId int,
+    @IsAlways bit,
+    @DateWork datetime2(0)
+)
+as
+begin
+    update a
+    set
+        a.EmployeeId = @EmployeeId,
+        a.RosterId = @RosterId,
+        a.IsAlways = @IsAlways,
+        a.DateWork = @DateWork
+    from
+        tool.tDutyManagerWorkdays as a
+    where
+        a.WorkdayId = @WorkdayId;
+end;
+
+create procedure tool.uspDutyManagerDelWorkday
+(
+    @WorkdayId int
+)
+as
+begin
+    delete a
+    from
+        tool.tDutyManagerWorkdays as a
+    where
+        a.WorkdayId = @WorkdayId;
+end;
+
+create procedure tool.uspDutyManagerGetRoster
+as
+begin
+    select
+        a.RosterId,
+        a.DayOfWeekId,
+        a.StartTime,
+        a.DurationOfDuty,
+        b.DayOfWeekName
+    from
+        tool.tDutyManagerRoster as a
+    inner join
+        tool.tDutyManagerDaysOfWeek as b
+        on a.DayOfWeekId = b.DayOfWeekId
+end;
+
+
+create procedure tool.uspDutyManagerAddRoster
+(
+    @DayOfWeekId int,
+    @StartTime time(0),
+    @DurationOfDuty int
+)
+as
+begin
+    insert into tool.tDutyManagerRoster
+    (
+        DayOfWeekId,
+        StartTime,
+        DurationOfDuty
+    )
+    values
+    (
+        @DayOfWeekId,
+        @StartTime,
+        @DurationOfDuty
+    )
+end;
+
+create procedure tool.uspDutyManagerEditRoster
+(
+    @RosterId int,
+    @DayOfWeekId int,
+    @StartTime time(0),
+    @DurationOfDuty int
+)
+as
+begin
+    update a
+    set
+        a.DayOfWeekId = @DayOfWeekId,
+        a.StartTime = @StartTime,
+        a.DurationOfDuty = @DurationOfDuty
+    from
+        tool.tDutyManagerRoster as a
+    where
+        a.RosterId = @RosterId;
+end;
+
+create procedure tool.uspDutyManagerDelRoster
+(
+    @RosterId int
+)
+as
+begin
+    delete a
+    from
+        tool.tDutyManagerRoster as a
+    where
+        a.RosterId = @RosterId;
+end;
+
+create procedure tool.uspDutyManagerGetDaysOfWeek
+as
+begin
+    select
+        a.DayOfWeekId,
+        a.DayOfWeekName
+    from
+        tool.tDutyManagerDaysOfWeek as a;
+end;
+
+select * from tool.tDutyManagerDaysOfWeek

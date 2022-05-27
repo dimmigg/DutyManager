@@ -1,6 +1,10 @@
 ﻿@using DutyManager.Models
 @model Employee
-@using (Html.BeginForm())
+@using (Html.BeginForm( null, null,
+                                 FormMethod.Post, new { @id = "form" }))
+
+
+
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
@@ -33,10 +37,10 @@
         </div>
 
 
-<fieldset>
-    <div class="form-group col-md-12 mb-3 pe-3 text-end">
-        <input asp-controller="Home" asp-action="EmployeeEdit" class="btn btn-success" type="submit" value="ОК" />
+        <fieldset>
+            <div class="form-group col-md-12 mb-3 pe-3 text-end">
+                <input asp-controller="Home" asp-action="EmployeeEdit" class="btn btn-success" type="submit" value="ОК" />
+            </div>
+        </fieldset>
     </div>
-</fieldset>
-</div>
 }
