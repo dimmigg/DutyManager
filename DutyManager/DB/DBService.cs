@@ -42,10 +42,52 @@ namespace DutyManager.DB
             }
         }
 
-        internal static IEnumerable<T> GetData<T>(object getDaysOfWeek)
+        #region Holiday
+        internal static void DelHoliday(int id)
         {
-            throw new NotImplementedException();
+            using (var connect = Connection.Instance.GetNewConnection())
+            {
+                DynamicParameters dp = new DynamicParameters();
+                dp.Add("HolidayId", id);
+                connect.ExecuteProcedure<string>(SqlStr.DelHoliday, dp);
+            }
         }
+
+        internal static void EditHoliday(Holiday day)
+        {
+            using (var connect = Connection.Instance.GetNewConnection())
+            {
+                DynamicParameters dp = new DynamicParameters();
+                dp.Add("HolidayId", day.HolidayId);
+                dp.Add("EmployeeId", day.EmployeeId);
+                dp.Add("DateStart", day.DateStart);
+                dp.Add("DateFinish", day.DateFinish);
+
+                connect.ExecuteProcedure<string>(SqlStr.EditHoliday, dp);
+            }
+        }
+
+        internal static void DelAll(string table)
+        {
+            using (var connect = Connection.Instance.GetNewConnection())
+            {
+                connect.Execute($"truncate table {table}");
+            }
+        }
+
+        internal static void AddHoliday(Holiday day)
+        {
+            using (var connect = Connection.Instance.GetNewConnection())
+            {
+                DynamicParameters dp = new DynamicParameters();
+                dp.Add("EmployeeId", day.EmployeeId);
+                dp.Add("DateStart", day.DateStart);
+                dp.Add("DateFinish", day.DateFinish);
+
+                connect.ExecuteProcedure<string>(SqlStr.AddHoliday, dp);
+            }
+        }
+        #endregion
 
         #region Roster
         internal static void DelRoster(int id)

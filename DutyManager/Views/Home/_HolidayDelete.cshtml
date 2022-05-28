@@ -1,0 +1,40 @@
+﻿@using DutyManager.Models
+@using System
+@using System.Globalization
+@model Holiday
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group m-3">
+        @Html.EditorFor(model => model.HolidayId, new { @class = "visually-hidden" })
+        <div class="row">
+            <div class="col-md-10">
+                @if (Model.HolidayId != 0)
+                {
+                    <p>
+                        Вы действительно хоте удалить отпуск?<br />
+                        <b>@Html.DisplayFor(model => model.EmployeeName)</b><br />
+                        @Model.DateStart.ToString("dd.MM.yyyy HH:mm") - @Model.DateFinish.ToString("dd.MM.yyyy HH:mm")
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        Вы действительно хоте удалить все отпуска?
+                    </p>
+                }
+            </div>
+            <div class="col-md-1 offset-md-1">
+                <button type="button" data-bs-dismiss="modal" class="btn-close" aria-label="Закрыть"></button>
+            </div>
+        </div>
+
+        <fieldset>
+            <div class="form-group col-md-12 mb-0 pe-0 text-end">
+
+                <input asp-controller="Home" asp-action="HolidayDel" class="btn btn-danger" type="submit" value="Удалить" />
+            </div>
+        </fieldset>
+    </div>
+}

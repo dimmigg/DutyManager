@@ -88,10 +88,10 @@ insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) val
 
 insert into tool.tDutyManagerHolidays (EmployeeId, DateStart, DateFinish) values (1, getdate(), getdate()+1)
 
-insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork) values (1, 11, '2022-05-21')
-insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork) values (1, 11, '2022-05-22')
-insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork) values (1, 11, '2022-05-23')
-insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork) values (1, 11, '2022-05-24')
+insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork, IsAlways) values (1, 11, '2022-05-21', 0)
+insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork, IsAlways) values (1, 11, '2022-05-22', 0)
+insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork, IsAlways) values (1, 11, '2022-05-23', 0)
+insert into tool.tDutyManagerWorkdays (EmployeeId, RosterId, DateWork, IsAlways) values (1, 11, '2022-05-24', 0)
                                         
 truncate table tool.tDutyManagerWorkdays
 truncate table tool.tDutyManagerMapping

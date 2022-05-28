@@ -49,6 +49,8 @@ namespace DutyManager.Models
                 DBService.EditWorkday(day);
         }
 
+        public static void DelAll() => DBService.DelAll(SqlStr.Workday);
+
         public static void AddWorkday(Workday day) => DBService.AddWorkday(day);
         public static void DelWorkday(int id) => DBService.DelWorkday(id);
     }

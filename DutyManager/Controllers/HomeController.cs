@@ -48,7 +48,10 @@ namespace DutyManager.Controllers
         public IActionResult WorkdayAdd() => PartialView("_WorkdayAdd");
         public IActionResult WorkdayDel(int WorkdayId)
         {
-            Workday.DelWorkday(WorkdayId);
+            if (WorkdayId != 0)
+                Workday.DelWorkday(WorkdayId);
+            else
+                Workday.DelAll();
             return Redirect("ListWorkdays");
         }
 
@@ -61,6 +64,33 @@ namespace DutyManager.Controllers
                 return Redirect("ListWorkdays");
             }
             return View("_WorkdayEdit", day);
+        }
+        #endregion
+
+        #region Holiday
+        public IActionResult ListHolidays() => View(Holiday.GetAllHolidays());
+
+        public IActionResult HolidayEditById(int Id) => PartialView("_HolidayEdit", Holiday.GetHolidayById(Id));
+        public IActionResult HolidayDeleteById(int Id) => PartialView("_HolidayDelete", Holiday.GetHolidayById(Id));
+        public IActionResult HolidayAdd() => PartialView("_HolidayAdd");
+        public IActionResult HolidayDel(int HolidayId)
+        {
+            if (HolidayId != 0)
+                Holiday.DelHoliday(HolidayId);
+            else
+                Holiday.DelAll();
+            return Redirect("ListHolidays");
+        }
+
+        [HttpPost]
+        public IActionResult HolidayEdit(Holiday day)
+        {
+            if (ModelState.IsValid)
+            {
+                Holiday.EditHoliday(day);
+                return Redirect("ListHolidays");
+            }
+            return View("_HolidayEdit", day);
         }
         #endregion
 

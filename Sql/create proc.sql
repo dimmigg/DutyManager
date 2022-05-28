@@ -11,17 +11,6 @@ begin
         tool.tDutyManagerEmployees as a
 end;
 
-create procedure tool.uspDutyManagerGetHolidays
-as
-begin
-    select
-        a.EmployeeId,
-        a.DateStart,
-        a.DateFinish
-    from
-        tool.tDutyManagerHolidays as a
-end;
-
 
 create procedure tool.uspDutyManagerGetMainTable
 as
@@ -49,7 +38,7 @@ begin
 end;
 
 
-
+-- СОТРУДНИКИ
 create procedure tool.uspDutyManagerEditEmployee
 (
     @EmployeeId int,
@@ -106,6 +95,8 @@ begin
     )
 end;
 
+
+-- Рабочие дни
 create procedure tool.uspDutyManagerGetWorkdays
 as
 begin
@@ -202,6 +193,8 @@ begin
         a.WorkdayId = @WorkdayId;
 end;
 
+
+-- дежурства
 create procedure tool.uspDutyManagerGetRoster
 as
 begin
@@ -274,6 +267,8 @@ begin
         a.RosterId = @RosterId;
 end;
 
+
+-- Дни недели
 create procedure tool.uspDutyManagerGetDaysOfWeek
 as
 begin
@@ -284,4 +279,74 @@ begin
         tool.tDutyManagerDaysOfWeek as a;
 end;
 
-select * from tool.tDutyManagerDaysOfWeek
+-- ОТПУСКА
+alter procedure tool.uspDutyManagerGetHolidays
+as
+begin
+    select
+        a.HolidayId,
+        a.EmployeeId,
+        b.FullName as EmployeeName,
+        a.DateStart,
+        a.DateFinish
+    from
+        tool.tDutyManagerHolidays as a
+    inner join
+        tool.tDutyManagerEmployees as b
+        on a.EmployeeId = b.EmployeeId;
+end;
+
+create procedure tool.uspDutyManagerAddHoliday
+(
+    @EmployeeId int,
+    @DateStart datetime2(0),
+    @DateFinish datetime2(0)
+)
+as
+begin
+    insert into tool.tDutyManagerHolidays
+    (
+        EmployeeId,
+        DateStart,
+        DateFinish
+    )
+    values
+    (
+        @EmployeeId,
+        @DateStart,
+        @DateFinish
+    )
+end;
+
+create procedure tool.uspDutyManagerEditHoliday
+(
+    @HolidayId int,
+    @EmployeeId int,
+    @DateStart datetime2(0),
+    @DateFinish datetime2(0)
+)
+as
+begin
+    update a
+    set
+        a.EmployeeId = @EmployeeId,
+        a.DateStart = @DateStart,
+        a.DateFinish = @DateFinish
+    from
+        tool.tDutyManagerHolidays as a
+    where
+        a.HolidayId = @HolidayId;
+end;
+
+create procedure tool.uspDutyManagerDelHoliday
+(
+    @HolidayId int
+)
+as
+begin
+    delete a
+    from
+        tool.tDutyManagerHolidays as a
+    where
+        a.HolidayId = @HolidayId;
+end;
