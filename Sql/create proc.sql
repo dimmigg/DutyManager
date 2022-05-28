@@ -117,7 +117,8 @@ begin
         a.DateWork,
         b.FullName,
         c.StartTime,
-        c.DurationOfDuty
+        c.DurationOfDuty,
+        d.DayOfWeekName
     from
         tool.tDutyManagerWorkdays as a
     inner join
@@ -126,6 +127,9 @@ begin
     inner join
         tool.tDutyManagerRoster as c
         on a.RosterId = c.RosterId
+    inner join
+        tool.tDutyManagerDaysOfWeek as d
+        on c.DayOfWeekId = d.DayOfWeekId
 end;
 
 
@@ -138,6 +142,11 @@ create procedure tool.uspDutyManagerAddWorkday
 )
 as
 begin
+    if @IsAlways = 1
+    begin
+        set @DateWork = null;
+    end;
+
     insert into tool.tDutyManagerWorkdays
     (
         EmployeeId,
@@ -164,6 +173,10 @@ create procedure tool.uspDutyManagerEditWorkday
 )
 as
 begin
+    if @IsAlways = 1
+    begin
+        set @DateWork = null;
+    end;
     update a
     set
         a.EmployeeId = @EmployeeId,

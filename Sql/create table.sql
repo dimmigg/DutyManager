@@ -41,7 +41,8 @@ create table tool.tDutyManagerWorkdays
     WorkdayId   int identity(1,1)   not null,
     EmployeeId  int                 not null,
     RosterId    int                 not null,
-    DateWork    datetime2(0)        not null,
+    IsAlways    bit                 not null,
+    DateWork    datetime2(0)            null,
 )on [primary]
 
 create table tool.tDutyManagerMapping
@@ -63,26 +64,26 @@ insert into tool.tDutyManagerDaysOfWeek (DayOfWeekName) values ('Пятница')
 insert into tool.tDutyManagerDaysOfWeek (DayOfWeekName) values ('Суббота')
 insert into tool.tDutyManagerDaysOfWeek (DayOfWeekName) values ('Воскресенье')
 
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (1, '09:00:00', 12)
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (1, '21:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (1, '09:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (1, '21:00:00', 12)
 
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (2, '09:00:00', 12)
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (2, '21:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (2, '09:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (2, '21:00:00', 12)
 
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (3, '09:00:00', 12)
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (3, '21:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (3, '09:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (3, '21:00:00', 12)
 
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (4, '09:00:00', 12)
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (4, '21:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (4, '09:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (4, '21:00:00', 12)
 
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (5, '09:00:00', 12)
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (5, '21:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (5, '09:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (5, '21:00:00', 12)
 
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (6, '09:00:00', 12)
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (6, '21:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (6, '09:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (6, '21:00:00', 12)
 
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (7, '09:00:00', 12)
-insert into tool.tDutyManagerRoster (DayWeekId, StartTime, DurationOfDuty) values (7, '21:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (7, '09:00:00', 12)
+insert into tool.tDutyManagerRoster (DayOfWeekId, StartTime, DurationOfDuty) values (7, '21:00:00', 12)
 
 
 insert into tool.tDutyManagerHolidays (EmployeeId, DateStart, DateFinish) values (1, getdate(), getdate()+1)

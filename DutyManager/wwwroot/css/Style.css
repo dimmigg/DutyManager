@@ -7,11 +7,23 @@
     overflow-x: auto;
     margin-bottom: 10px;
 }
+.scroll-table-body-always {
+    height: 35vh;
+    overflow-x: auto;
+    margin-bottom: 10px;
+}
+
+.scroll-table-body-days {
+    height: 35vh;
+    overflow-x: auto;
+    margin-bottom: 10px;
+}
 /**/
 .scroll-table table {
     width: 100%;
     table-layout: fixed;
 }
+
 
 .scroll-table thead th {
     text-align: center;

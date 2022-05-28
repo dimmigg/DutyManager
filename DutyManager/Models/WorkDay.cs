@@ -36,7 +36,8 @@ namespace DutyManager.Models
         [Required(ErrorMessage = "Необходимо выбрать дужерство")]
         [ValidateNever]
         public IEnumerable<SelectListItem> Roster { get; set; }
-        public DateTime StartDateWork => DateWork + StartTime;
+        public string DayOfWeekName { get; set; }
+        public DateTime StartDateWork => (DateWork + StartTime);
         public DateTime EndDateWork => StartDateWork.AddHours(DurationOfDuty);
         public static IEnumerable<Workday> GetAllWorkdays() => DBService.GetData<Workday>(SqlStr.GetWorkdays);
         public static Workday GetWorkdayById(int id) => id == -1 ? new Workday() : GetAllWorkdays().FirstOrDefault(x => x.WorkdayId == id);
@@ -50,8 +51,5 @@ namespace DutyManager.Models
 
         public static void AddWorkday(Workday day) => DBService.AddWorkday(day);
         public static void DelWorkday(int id) => DBService.DelWorkday(id);
-
-
-
     }
 }

@@ -31,7 +31,7 @@
                     @Html.LabelFor(model => model.DateWork, htmlAttributes: new { @class = "form-label control-label col-1 ms-2 mt-2" })
                     <div class="form-check col form-switch ms-3">
                         @*@Html.LabelFor(model => model.IsAlways, htmlAttributes: new { @class = "form-check-label col-md-8 ms-2 mt-2", @for = "SwitchCheck" })*@
-                        @Html.EditorFor(model => model.IsAlways, new { htmlAttributes = new { @class = "form-check-input check-box mt-3 pb-1 p-2", @onChange = "changeIsAlways(this)", @id = "SwitchCheck" } })
+                        @Html.EditorFor(model => model.IsAlways, new { htmlAttributes = new { @class = "form-check-input check-box mt-3 pb-1 p-2", @onChange = "changeIsAlways(this)", @id = "switchcheck" } })
                         <label class="form-label col-auto ms-0 mt-2" for="SwitchCheck">Постоянно</label>
                     </div>
                 </div>

@@ -105,6 +105,7 @@ namespace DutyManager.DB
                 dp.Add("WorkdayId", day.WorkdayId);
                 dp.Add("EmployeeId", day.EmployeeId);
                 dp.Add("RosterId", day.RosterId);
+                dp.Add("IsAlways", day.IsAlways);
                 dp.Add("DateWork", day.DateWork);
 
                 connect.ExecuteProcedure<string>(SqlStr.EditWorkday, dp);
@@ -118,6 +119,7 @@ namespace DutyManager.DB
                 DynamicParameters dp = new DynamicParameters();
                 dp.Add("EmployeeId", day.EmployeeId);
                 dp.Add("RosterId", day.RosterId);
+                dp.Add("IsAlways", day.IsAlways);
                 dp.Add("DateWork", day.DateWork);
 
                 connect.ExecuteProcedure<string>(SqlStr.AddWorkday, dp);
