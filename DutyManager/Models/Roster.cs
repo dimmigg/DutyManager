@@ -26,7 +26,6 @@ namespace DutyManager.Models
         public string DayOfWeekName { get; set; }
         public string RosterName => $"{DayOfWeekName}: {StartTime:hh\\:mm} - {EndTime:hh\\:mm}";
         [Display(Name = "Дни недели")]
-        [Required(ErrorMessage = "Необходимо выбрать день недели")]
         public IEnumerable<SelectListItem> DaysOfWeek { get; set; }
         public static IEnumerable<Roster> GetAllRoster() => DBService.GetData<Roster>(SqlStr.GetRoster);
         public static Roster GetRosterById(int id) => id == -1 ? new Roster() : GetAllRoster().FirstOrDefault(x => x.RosterId == id);

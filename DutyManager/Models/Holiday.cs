@@ -1,4 +1,5 @@
-﻿using DutyManager.DB;
+﻿using DutyManager.Attributes;
+using DutyManager.DB;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,6 +10,7 @@ using System.Linq;
 
 namespace DutyManager.Models
 {
+    [HolidayDateComparsion]
     public class Holiday
     {
         [HiddenInput(DisplayValue = false)]

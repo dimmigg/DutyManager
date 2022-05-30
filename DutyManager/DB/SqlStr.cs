@@ -5,6 +5,7 @@
         internal static string GetDaysOfWeek => "tool.uspDutyManagerGetDaysOfWeek";
 
         public static string GetMainTable => "tool.uspDutyManagerGetMainTable";
+        public static string Mapping => "tool.tDutyManagerMapping";
 
         // Сотрудники
         public static string GetEmployees => "tool.uspDutyManagerGetEmployees";

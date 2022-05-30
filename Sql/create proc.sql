@@ -35,6 +35,8 @@ begin
     inner join
         tool.tDutyManagerDaysOfWeek as d
         on c.DayOfWeekId = d.DayOfWeekId
+    order by
+        a.DateStart
 end;
 
 
@@ -209,6 +211,9 @@ begin
     inner join
         tool.tDutyManagerDaysOfWeek as b
         on a.DayOfWeekId = b.DayOfWeekId
+    order by
+        a.DayOfWeekId,
+        a.StartTime
 end;
 
 
@@ -280,7 +285,7 @@ begin
 end;
 
 -- Œ“œ”— ¿
-alter procedure tool.uspDutyManagerGetHolidays
+create procedure tool.uspDutyManagerGetHolidays
 as
 begin
     select

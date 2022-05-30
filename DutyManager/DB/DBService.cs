@@ -19,19 +19,21 @@ namespace DutyManager.DB
             }
         }
 
-        public static void InsertData<T>(IEnumerable<T> data, string table)
+        public static void InsertData<T>(IEnumerable<T> data)
         {
             if (data.Any())
             {
+
                 using (SqlBulkCopy bulkCopy = new SqlBulkCopy(Connection.Instance.ConnectionString()))
                 {
-                    bulkCopy.DestinationTableName = table;
+                    bulkCopy.DestinationTableName = SqlStr.Mapping;
                     foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(typeof(T)))
                     {
                         bulkCopy.ColumnMappings.Add(descriptor.Name, descriptor.Name);
                     }
                     try
                     {
+                        DelAll(SqlStr.Mapping);
                         bulkCopy.WriteToServer(data.AsTable());
                     }
                     catch (Exception ex)
