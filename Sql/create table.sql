@@ -1,4 +1,4 @@
-drop table tool.tDutyManagerEmployees
+tDutyManagerEmployeesdrop table tool.tDutyManagerEmployees
 drop table tool.tDutyManagerDaysOfWeek
 drop table tool.tDutyManagerRoster
 drop table tool.tDutyManagerMapping
@@ -45,7 +45,7 @@ create table tool.tDutyManagerWorkdays
     DateWork    datetime2(0)            null,
 )on [primary]
 
-create table tool.tDutyManagerMapping
+create table truncate table tool.tDutyManagerMapping
 (
     MappingId   int identity(1,1)   not null,
     RosterId    int                 not null,

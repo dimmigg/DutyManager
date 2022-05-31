@@ -2,6 +2,7 @@
 using DutyManager.Models;
 using DutyManager.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 
 namespace DutyManager.Controllers
@@ -12,6 +13,20 @@ namespace DutyManager.Controllers
         public IActionResult Calc()
         {
             Calculate.StartCalculate();
+            return Redirect("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Calc(DateTime BeginDate, DateTime EndDate)
+        {
+            Calculate.StartCalculate(BeginDate, EndDate);
+            return Redirect("Index");
+        }
+
+        //[HttpPost]
+        public IActionResult Export()
+        {
+            FileExport.WriteToExcel(MainTableModel.GetAllItems(), $"E:\\ex\\temp.xlsx");
             return Redirect("Index");
         }
 

@@ -1,0 +1,7 @@
+insert into tool.tDutyManagerEmployees (FullName, LoginName, Phone)values ('Заика Анатолий','zaika_ag','7 995 207-19-51' )
+insert into tool.tDutyManagerEmployees (FullName, LoginName, Phone)values ('Мельников Антон','melnikov_a_n','7 918 332-52-59' )
+insert into tool.tDutyManagerEmployees (FullName, LoginName, Phone)values ('Саюров Дмитрий','saurov_dv','7 999 631-09-13' )
+insert into tool.tDutyManagerEmployees (FullName, LoginName, Phone)values ('Гудовщиков Сергей','gudovcshikov_sk','7 952 856-78-05' )
+insert into tool.tDutyManagerEmployees (FullName, LoginName, Phone)values ('Лукьянченко Николай','lukyanchenko_na','7 952 857-75-11' )
+insert into tool.tDutyManagerEmployees (FullName, LoginName, Phone)values ('Кошелев Дмитрий','koshelev_da','7 983 152-82-63' )
+insert into tool.tDutyManagerEmployees (FullName, LoginName, Phone)values ('Григорьев Евгений','grigorev_ev','7 961 347-43-29' )

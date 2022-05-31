@@ -28,7 +28,12 @@ namespace DutyManager.Services
         }
         public static void StartCalculate(DateTime start, DateTime finish)
         {
-
+            Start = start;
+            Finish = finish;
+            Init(); 
+            CalcHandRoster();
+            CalcAutoRoster();
+            DBService.InsertData(MyDailyDuties);
         }
 
         private static IEnumerable<int> GetHoliDayEmployees(DateTime currDate, int roster)
@@ -96,18 +101,19 @@ namespace DutyManager.Services
         private static void CalcAutoRoster()
         {
             var currNode = MyDailyDuties.Head;
-            while (currNode.Next != null)
-            {
-                if (currNode.Data.DateStart.DayOfWeek() == 1)
-                    ResetCountDay(currNode.Data.DateStart);
-                if (currNode.Data.EmployeeId == -1)
+            if(MyDailyDuties.Head != null)
+                while (currNode.Next != null)
                 {
-                    currNode.Data.EmployeeId = GetFreeEmployee(currNode);
-                    if (currNode.Data.EmployeeId != -1)
-                        AllEmployees.FirstOrDefault(x => x.EmployeeId == currNode.Data.EmployeeId).CountDuty++;
+                    if (currNode.Data.DateStart.DayOfWeek() == 1)
+                        ResetCountDay(currNode.Data.DateStart);
+                    if (currNode.Data.EmployeeId == -1)
+                    {
+                        currNode.Data.EmployeeId = GetFreeEmployee(currNode);
+                        if (currNode.Data.EmployeeId != -1)
+                            AllEmployees.FirstOrDefault(x => x.EmployeeId == currNode.Data.EmployeeId).CountDuty++;
+                    }
+                    currNode = currNode.Next;
                 }
-                currNode = currNode.Next;
-            }
         }
 
         private static int GetFreeEmployee(Node<MappingModel> node)
@@ -115,7 +121,7 @@ namespace DutyManager.Services
             var holiDayEmployees = GetHoliDayEmployees(node.Data.DateStart, node.Data.RosterId);
             IEnumerable<Employee> workEmployees;
             if (holiDayEmployees.Any())
-                workEmployees = AllEmployees.Where(x => holiDayEmployees.Any(e => e != x.EmployeeId));
+                workEmployees = AllEmployees.Where(x => !(holiDayEmployees.Any(e => e == x.EmployeeId)));
             else
                 workEmployees = AllEmployees;
 
