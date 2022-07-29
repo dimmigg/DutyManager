@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace DutyManager.Models
 {
@@ -36,7 +35,6 @@ namespace DutyManager.Models
             else
                 DBService.EditRoster(ros);
         }
-
         public static void AddRoster(Roster ros) => DBService.AddRoster(ros);
         public static void DelRoster(int id) => DBService.DelRoster(id);
     }

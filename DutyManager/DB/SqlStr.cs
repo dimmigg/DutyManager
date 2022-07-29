@@ -3,7 +3,6 @@
     public static class SqlStr
     {
         internal static string GetDaysOfWeek => "tool.uspDutyManagerGetDaysOfWeek";
-
         public static string GetMainTable => "tool.uspDutyManagerGetMainTable";
         public static string Mapping => "tool.tDutyManagerMapping";
 
@@ -32,6 +31,5 @@
         public static string DelHoliday => "tool.uspDutyManagerDelHoliday";
         public static string EditHoliday => "tool.uspDutyManagerEditHoliday";
         public static string AddHoliday => "tool.uspDutyManagerAddHoliday";
-
     }
 }

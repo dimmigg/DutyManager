@@ -37,10 +37,8 @@ namespace DutyManager.Models
             else
                 DBService.EditHoliday(day);
         }
-
         public static void AddHoliday(Holiday day) => DBService.AddHoliday(day);
         public static void DelHoliday(int id) => DBService.DelHoliday(id);
-
         public static void DelAll() => DBService.DelAll(SqlStr.Holiday);
     }
 }
