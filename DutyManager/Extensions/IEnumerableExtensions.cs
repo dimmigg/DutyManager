@@ -1,5 +1,4 @@
 ﻿using DutyManager.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,32 +35,6 @@ namespace DutyManager.Extensions
                 result.Rows.Add(row);
             }
             return result;
-        }
-
-        public static IEnumerable ToSelectListItems(this IEnumerable<DutyManager.Models.Employee> employees, int selectedId)
-        {
-            return employees.OrderBy(emp => emp.FullName)
-                      .Select(emp =>
-                          new SelectListItem
-                          {
-                              Selected = (emp.EmployeeId == selectedId),
-                              Text = emp.FullName,
-                              Value = emp.EmployeeId.ToString()
-                          });
-        }
-
-        public static T Random<T>(this IEnumerable<T> enumerable)
-        {
-            if (enumerable == null)
-            {
-                throw new ArgumentNullException(nameof(enumerable));
-            }
-
-            // note: creating a Random instance each call may not be correct for you,
-            // consider a thread-safe static instance
-            var r = new Random();
-            var list = enumerable as IList<T> ?? enumerable.ToList();
-            return list.Count == 0 ? default(T) : list[r.Next(0, list.Count)];
         }
     }
 }
