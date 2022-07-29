@@ -3,7 +3,6 @@ using DutyManager.Extensions;
 using DutyManager.Models;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace DutyManager.Services
@@ -30,7 +29,7 @@ namespace DutyManager.Services
         {
             Start = start;
             Finish = finish;
-            Init(); 
+            Init();
             CalcHandRoster();
             CalcAutoRoster();
             DBService.InsertData(MyDailyDuties);
@@ -55,7 +54,6 @@ namespace DutyManager.Services
                 if (item.DateStart.WeekOfYear() == date.WeekOfYear())
                     AllEmployees.FirstOrDefault(x => x.EmployeeId == item.EmployeeId).CountDuty++;
             }
-
         }
 
         private static void Init()
@@ -86,14 +84,16 @@ namespace DutyManager.Services
             foreach (var item in MyDailyDuties)
             {
                 var holiDayEmployees = GetHoliDayEmployees(item.DateStart, item.RosterId);
-                if (workdaysWithAlways.Any(x => x.RosterId == item.RosterId && !holiDayEmployees.Any(h => h == workdaysWithAlways.Where(w => w.RosterId == item.RosterId).FirstOrDefault().EmployeeId)))
+                if (workdaysWithAlways.Any(x => x.RosterId == item.RosterId && !holiDayEmployees.Any(h => h == workdaysWithAlways.FirstOrDefault(w => w.RosterId == item.RosterId).EmployeeId)))
                 {
-                    item.EmployeeId = workdaysWithAlways.Where(x => x.RosterId == item.RosterId).FirstOrDefault().EmployeeId;
+                    item.EmployeeId = GetEmployeeHand(workdaysWithAlways.Where(x => x.RosterId == item.RosterId));
+                    AllEmployees.Where(x => x.EmployeeId == item.EmployeeId).FirstOrDefault().CountDuty++;
                 }
 
                 if (WorkdaysWithDay.Any(x => x.RosterId == item.RosterId && x.StartDateWork == item.DateStart))
                 {
-                    item.EmployeeId = WorkdaysWithDay.Where(x => x.RosterId == item.RosterId && x.StartDateWork == item.DateStart).FirstOrDefault().EmployeeId;
+                    item.EmployeeId = GetEmployeeHand(WorkdaysWithDay.Where(x => x.RosterId == item.RosterId && x.StartDateWork == item.DateStart));
+                    AllEmployees.Where(x => x.EmployeeId == item.EmployeeId).FirstOrDefault().CountDuty++;
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace DutyManager.Services
         private static void CalcAutoRoster()
         {
             var currNode = MyDailyDuties.Head;
-            if(MyDailyDuties.Head != null)
+            if (MyDailyDuties.Head != null)
                 while (currNode.Next != null)
                 {
                     if (currNode.Data.DateStart.DayOfWeek() == 1)
@@ -149,11 +149,22 @@ namespace DutyManager.Services
                 }
 
                 int minCountDuty = allFreeEmployees.Min(x => x.CountDuty);
-                var freeEmployees = allFreeEmployees.Where(x => x.CountDuty == minCountDuty).ToList();
-                return freeEmployees[new Random().Next(freeEmployees.Count)].EmployeeId;
+                return allFreeEmployees.Where(x => x.CountDuty == minCountDuty).Random().EmployeeId;
             }
             else
                 return -1;
+        }
+
+        private static int GetEmployeeHand(IEnumerable<Workday> workdays)
+        {
+            List<Employee> employees = new List<Employee>();
+            foreach (var item in workdays)
+            {
+                if (AllEmployees.Any(x => x.EmployeeId == item.EmployeeId))
+                    employees.Add(AllEmployees.FirstOrDefault(x => x.EmployeeId == item.EmployeeId));
+            }
+            int minCountDay = employees.Min(x => x.CountDuty);
+            return employees.Where(x => x.CountDuty == minCountDay).Random().EmployeeId;
         }
     }
 }

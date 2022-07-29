@@ -29,9 +29,6 @@
                             <td width="3%"><a href="#" title="Удалить" id=@item.HolidayId.ToString() data-bs-toggle="modal" data-bs-target="#modal" onClick="HolidayDelete(this)"><i class="fa-solid fa-trash"></i></a></td>
                         </tr>
                     }
-
-
-
                 </tbody>
             </table>
         </div>
@@ -58,15 +55,15 @@ else
         });
 
         function HolidayEdit(obj) {
-            let url = '@Url.Action("HolidayEditById", "Home")'
-            let id = obj.id
-            $('#edit-content').load(url, { Id: id })
+            let url = '@Url.Action("HolidayEditById", "Home")';
+            let id = obj.id;
+            $('#edit-content').load(url, { Id: id });
         }
 
         function HolidayDelete(obj) {
-            let url = '@Url.Action("HolidayDeleteById", "Home")'
-            let id = obj.id
-            $('#edit-content').load(url, { Id: id })
+            let url = '@Url.Action("HolidayDeleteById", "Home")';
+            let id = obj.id;
+            $('#edit-content').load(url, { Id: id });
         }
     </script>
 }

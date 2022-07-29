@@ -49,26 +49,16 @@
 
         function EmployeeEdit(obj) {
             let url = '@Url.Action("EmployeeEditById", "Home")';
-            let id = obj.id
+            let id = obj.id;
             $('#edit-content').load(url, { Id: id });
             clearvalid()
         }
 
         function EmployeeDelete(obj) {
             let url = '@Url.Action("EmployeeDeleteById", "Home")';
-            let id = obj.id
+            let id = obj.id;
             $('#edit-content').load(url, { Id: id });
         }
-
-        //function clearvalid() {
-        //    alert("123")
-        //    //var form = $('#form')
-        //    //    .removeData("validator") /* added by the raw jquery.validate plugin */
-        //    //    .removeData("unobtrusiveValidation");  /* added by the jquery unobtrusive plugin*/
-
-        //    //$.validator.unobtrusive.parse('#form');
-        //    //jQuery.validator.unobtrusive.parse('#form')
-        //}
 
         $(function () {
             $(document).ajaxComplete(function () {

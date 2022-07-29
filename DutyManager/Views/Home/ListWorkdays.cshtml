@@ -95,42 +95,41 @@ else
         });
 
         function WorkdayEdit(obj) {
-            let url = '@Url.Action("WorkdayEditById", "Home")'
-            let id = obj.id
+            let url = '@Url.Action("WorkdayEditById", "Home")';
+            let id = obj.id;
             $('#edit-content').load(url, { Id: id },
-                                    function () {
-                                        changeIsAlways()
-                                    })
+                function () {
+                    changeIsAlways()
+                });
         }
 
         function WorkdayDelete(obj) {
-            let url = '@Url.Action("WorkdayDeleteById", "Home")'
-            let id = obj.id
+            let url = '@Url.Action("WorkdayDeleteById", "Home")';
+            let id = obj.id;
             $('#edit-content').load(url, { Id: id });
         }
 
         function changeIsAlways() {
             if ($('#switchcheck').is(":checked")) {
-                $('#datepicker').prop("disabled", true)
-                getrosterbyid(-1)
+                $('#datepicker').prop("disabled", true);
+                getrosterbyid(-1);
             } else {
-                $('#datepicker').prop("disabled", false)
-                getroster('#datepicker')
+                $('#datepicker').prop("disabled", false);
+                getroster('#datepicker');
             }
         }
 
         function getroster(obj)
         {
             // получаем выбранный id
-            let d = new Date($(obj).val()).getDay()
+            let d = new Date($(obj).val()).getDay();
 
             var id = d == 0 ? 7 : d;
-            getrosterbyid(id)
+            getrosterbyid(id);
         };
 
 
         function getrosterbyid(obj) {
-
             $.ajax({
                 type: 'GET',
                 url: '@Url.Action("GetRosterByDate", "Home")/' + obj,
@@ -140,6 +139,5 @@ else
                 }
             });
         }
-
     </script>
 }

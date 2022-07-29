@@ -49,13 +49,13 @@
 
         function RosterEdit(obj) {
             let url = '@Url.Action("RosterEditById", "Home")';
-            let id = obj.id
+            let id = obj.id;
             $('#edit-content').load(url, { Id: id });
         }
 
         function RosterDelete(obj) {
             let url = '@Url.Action("RosterDeleteById", "Home")';
-            let id = obj.id
+            let id = obj.id;
             $('#edit-content').load(url, { Id: id });
         }
     </script>

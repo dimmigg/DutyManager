@@ -1,9 +1,7 @@
-﻿using DutyManager.DB;
-using DutyManager.Models;
+﻿using DutyManager.Models;
 using DutyManager.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 
 namespace DutyManager.Controllers
 {
@@ -23,11 +21,11 @@ namespace DutyManager.Controllers
             return Redirect("Index");
         }
 
-        //[HttpPost]
+        [HttpGet]
         public IActionResult Export()
         {
-            FileExport.WriteToExcel(MainTableModel.GetAllItems(), $"E:\\ex\\temp.xlsx");
-            return Redirect("Index");
+            FileExport.WriteToExcel(MainTableModel.GetAllItems(), $"E:\\Cache\\DutyManager\\temp.xlsx");
+            return File(System.IO.File.ReadAllBytes($"E:\\Cache\\DutyManager\\temp.xlsx"), "application/octet-stream", "дежурства.xlsx");
         }
 
 
@@ -46,7 +44,7 @@ namespace DutyManager.Controllers
         [HttpPost]
         public IActionResult EmployeeEdit(Employee emp)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Employee.EditEmployee(emp);
                 return Redirect("ListEmployee");
