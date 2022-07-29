@@ -31,7 +31,6 @@ namespace DutyManager.Controllers
 
         #region Employee
         public IActionResult ListEmployee() => View(Employee.GetAllEmployees());
-
         public IActionResult EmployeeEditById(int Id) => PartialView("_EmployeeEdit", Employee.GetEmployeeById(Id));
         public IActionResult EmployeeDeleteById(int Id) => PartialView("_EmployeeDelete", Employee.GetEmployeeById(Id));
         public IActionResult EmployeeAdd() => PartialView("_EmployeeAdd");
@@ -55,7 +54,6 @@ namespace DutyManager.Controllers
 
         #region Workday
         public IActionResult ListWorkdays() => View(Workday.GetAllWorkdays());
-
         public IActionResult WorkdayEditById(int Id) => PartialView("_WorkdayEdit", Workday.GetWorkdayById(Id));
         public IActionResult WorkdayDeleteById(int Id) => PartialView("_WorkdayDelete", Workday.GetWorkdayById(Id));
         public IActionResult WorkdayAdd() => PartialView("_WorkdayAdd");
@@ -82,7 +80,6 @@ namespace DutyManager.Controllers
 
         #region Holiday
         public IActionResult ListHolidays() => View(Holiday.GetAllHolidays());
-
         public IActionResult HolidayEditById(int Id) => PartialView("_HolidayEdit", Holiday.GetHolidayById(Id));
         public IActionResult HolidayDeleteById(int Id) => PartialView("_HolidayDelete", Holiday.GetHolidayById(Id));
         public IActionResult HolidayAdd() => PartialView("_HolidayAdd");
@@ -109,7 +106,6 @@ namespace DutyManager.Controllers
 
         #region Roster
         public IActionResult ListRoster() => View(Roster.GetAllRoster());
-
         public IActionResult RosterEditById(int Id) => PartialView("_RosterEdit", Roster.GetRosterById(Id));
         public IActionResult RosterDeleteById(int Id) => PartialView("_RosterDelete", Roster.GetRosterById(Id));
         public IActionResult RosterAdd() => PartialView("_RosterAdd");

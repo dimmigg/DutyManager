@@ -1,10 +1,8 @@
 ﻿using DutyManager.DB;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace DutyManager.Models
 {
@@ -29,7 +27,6 @@ namespace DutyManager.Models
         public string OtherInfo { get; set; }
         [HiddenInput(DisplayValue = false)]
         public int CountDuty { get; set; } = 0;
-
         public static IEnumerable<Employee> GetAllEmployees() => DBService.GetData<Employee>(SqlStr.GetEmployees);
         public static Employee GetEmployeeById(int id) => id == -1 ? new Employee() : GetAllEmployees().FirstOrDefault(x => x.EmployeeId == id);
         public static void EditEmployee(Employee emp)
@@ -39,9 +36,7 @@ namespace DutyManager.Models
             else
                 DBService.EditEmployee(emp);
         }
-
         public static void AddEmployee(Employee emp) => DBService.AddEmployee(emp);
         public static void DelEmployee(int id) => DBService.DelEmployee(id);
-
     }
 }

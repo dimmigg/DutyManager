@@ -3,12 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace DutyManager.Models
 {
@@ -48,9 +45,7 @@ namespace DutyManager.Models
             else
                 DBService.EditWorkday(day);
         }
-
         public static void DelAll() => DBService.DelAll(SqlStr.Workday);
-
         public static void AddWorkday(Workday day) => DBService.AddWorkday(day);
         public static void DelWorkday(int id) => DBService.DelWorkday(id);
     }

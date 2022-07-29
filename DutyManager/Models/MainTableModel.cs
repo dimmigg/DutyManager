@@ -19,8 +19,7 @@ namespace DutyManager.Models
         [Description ("Номер телефона")]
         public string Phone { get; set; }
         [Description ("Логин")]
-        public string LoginName { get; set; }
-        
+        public string LoginName { get; set; }   
         public string OtherInfo { get; set; }
         public static IEnumerable<MainTableModel> GetAllItems() => DBService.GetData<MainTableModel>(SqlStr.GetMainTable);
     }
