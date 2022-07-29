@@ -1,0 +1,44 @@
+﻿@using DutyManager.Models
+@model Holiday
+@{
+    Model.Employees = new SelectList(Employee.GetAllEmployees(), "EmployeeId", "FullName");
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group m-3">
+            @Html.EditorFor(model => model.HolidayId, new { @class = "visually-hidden" })
+            <div>
+                <div class="row">
+                    <div class="col-md-10">
+                        @Html.LabelFor(model => model.Employees, htmlAttributes: new { @class = "form-label control-label col-md-8 ms-2" })
+                    </div>
+                    <div class="col-md-1 offset-md-1">
+                        <button type="button" data-bs-dismiss="modal" class="btn-close" aria-label="Закрыть"></button>
+                    </div>
+                </div>
+                @Html.DropDownListFor(x => x.EmployeeId, Model.Employees, new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.Employees, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.DateStart, htmlAttributes: new { @class = "form-label control-label" })
+                @Html.EditorFor(model => model.DateStart, new { htmlAttributes = new { @class = "form-control", @onChange = "getroster(this)", @id = "datepicker" } })
+                @Html.ValidationMessageFor(model => model.DateStart, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.DateFinish, htmlAttributes: new { @class = "form-label control-label" })
+                @Html.EditorFor(model => model.DateFinish, new { htmlAttributes = new { @class = "form-control", @onChange = "getroster(this)", @id = "datepicker" } })
+                @Html.ValidationMessageFor(model => model.DateFinish, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <fieldset>
+            <div class="form-group col-md-12 mb-3 pe-3 text-end">
+                <input asp-controller="Home" asp-action="HolidayEdit" class="btn btn-success" type="submit" value="ОК" />
+            </div>
+        </fieldset>
+    </div>
+}

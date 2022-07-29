@@ -1,0 +1,42 @@
+﻿@using DutyManager.Models
+@using System
+@using System.Globalization
+@model Workday
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group m-3">
+        @Html.EditorFor(model => model.WorkdayId, new { @class = "visually-hidden" })
+        <div class="row">
+            <div class="col-md-10">
+                @if (Model.WorkdayId != 0)
+                {
+
+                    <p>
+                        Вы действительно хоте удалить дежурство?<br />
+                        <b>@Html.DisplayFor(model => model.FullName)</b><br />
+                        @Model.StartDateWork.ToString("dd.MM.yyyy HH:mm") - @Model.EndDateWork.ToString("dd.MM.yyyy HH:mm")
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        Вы действительно хоте удалить все дежурства?
+                        <br /><b>Удалятся дежурства по дню и постоянные.</b>
+                    </p>
+                }
+            </div>
+            <div class="col-md-1 offset-md-1">
+                <button type="button" data-bs-dismiss="modal" class="btn-close" aria-label="Закрыть"></button>
+            </div>
+        </div>
+
+        <fieldset>
+            <div class="form-group col-md-12 mb-0 pe-0 text-end">
+
+                <input asp-controller="Home" asp-action="WorkdayDel" class="btn btn-danger" type="submit" value="Удалить" />
+            </div>
+        </fieldset>
+    </div>
+}
